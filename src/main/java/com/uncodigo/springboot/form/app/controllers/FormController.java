@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,8 +20,11 @@ public class FormController {
 
 	@GetMapping("/form")
 	public String form(Model model) {
+		
+		Usuario usuario = new Usuario();
 
 		model.addAttribute("titulo", "Formulario de prueba para usuarios:");
+		model.addAttribute("usuario", usuario);
 
 		return "form";
 
@@ -29,6 +33,9 @@ public class FormController {
 	@PostMapping("/form")
 	public String procesarForm(@Valid Usuario usuario, BindingResult result, Model model
 	/*
+	 * @ModelAttribute("user") -> Para definir un nombre de variable personalizado y no el nombre
+	 * de la clase que crea el objeto.
+	 * 
 	 * Primero va el objeto a recibir y valida, Luego BindingResult para recibir los
 	 * resultados de la validación. BindingResult
 	 * 
@@ -49,7 +56,7 @@ public class FormController {
 			 */
 			Map<String, String> errores = new HashMap<>();
 			result.getFieldErrors().forEach(error -> {
-				errores.put(error.getField(), "El campo ".concat(error.getField()).concat(error.getDefaultMessage()));
+				errores.put(error.getField(), "El campo ".concat(error.getField()).concat(" ").concat(error.getDefaultMessage()));
 			});
 			
 			model.addAttribute("error", errores);
