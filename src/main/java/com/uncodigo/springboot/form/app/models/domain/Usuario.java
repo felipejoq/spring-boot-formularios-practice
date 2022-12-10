@@ -1,18 +1,22 @@
 package com.uncodigo.springboot.form.app.models.domain;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 public class Usuario {
-	
+
 	private String id;
 
-	@NotEmpty
+	@NotEmpty(message = "El username no puede ser vació")
+	@Size(min = 3, max = 8, message = "Debe ingresar un username entre 3 y 8 carácteres.")
 	private String username;
 
 	@NotEmpty
 	private String password;
 
 	@NotEmpty
+	@Email(message = "Correo con formato incorrecto")
 	private String email;
 
 	@NotEmpty
@@ -60,7 +64,7 @@ public class Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
