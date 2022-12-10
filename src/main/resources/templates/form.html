@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaft.org">
+<head>
+<meta charset="UTF-8" />
+
+<title>Manejando Formularios con Spring y Validations</title>
+
+</head>
+<body>
+
+	<form th:action="@{/form}" method="POST">
+
+		<div>
+			<label for="username">Username</label>
+			<div>
+				<input name="username" id="username" type="text" />
+			</div>
+		</div>
+		
+		<div>
+			<label for="password">Password:</label>
+			<div>
+				<input name="password" id="password" type="password" />
+			</div>
+		</div>
+		
+		<div>
+			<label for="email">Email:</label>
+			<div>
+				<input name="email" id="email" type="email" />
+			</div>
+		</div>
+		
+		<button type="submit">Enviar</button>
+
+	</form>
+
+</body>
+</html>
+
