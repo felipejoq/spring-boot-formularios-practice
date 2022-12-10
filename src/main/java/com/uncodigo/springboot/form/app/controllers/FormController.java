@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uncodigo.springboot.form.app.models.domain.Usuario;
 
@@ -21,15 +21,10 @@ public class FormController {
 	}
 
 	@PostMapping("/form")
-	public String procesarForm(Model model,
-			@RequestParam("username") String username, // Se le puede indicar explícitamente el nombre del parámetro.
-			@RequestParam String password,
-			@RequestParam String email) {
-		
-		Usuario usuario = new Usuario();
-		usuario.setUsername(username);
-		usuario.setEmail(email);
-		usuario.setPassword(password);
+	public String procesarForm(Usuario usuario, Model model
+			/* @RequestParam("username") String username, -> Se le puede indicar explícitamente el nombre del parámetro.
+			 * @RequestParam String password
+			 * @RequestParam String email */) {
 		
 		model.addAttribute("titulo", "Resultado del from:");
 		
