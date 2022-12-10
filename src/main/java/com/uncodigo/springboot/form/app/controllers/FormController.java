@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.uncodigo.springboot.form.app.models.domain.Usuario;
 
 import jakarta.validation.Valid;
 
 @Controller
+@SessionAttributes("usuario")
 public class FormController {
 
 	@GetMapping("/form")
@@ -34,7 +37,7 @@ public class FormController {
 	}
 
 	@PostMapping("/form")
-	public String procesarForm(@Valid Usuario usuario, BindingResult result, Model model) {
+	public String procesarForm(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
 		
 		/*
 		 * @ModelAttribute("user") -> Para definir un nombre de variable personalizado y no el nombre
@@ -71,12 +74,13 @@ public class FormController {
 			 * model.addAttribute("error", errores);
 			 */
 			
-			
 
 			return "form";
 		}
 
 		model.addAttribute("usuario", usuario);
+
+		status.setComplete();
 
 		return "resultado";
 	}
