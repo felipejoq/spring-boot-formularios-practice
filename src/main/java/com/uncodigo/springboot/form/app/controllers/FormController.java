@@ -22,6 +22,9 @@ public class FormController {
 	public String form(Model model) {
 		
 		Usuario usuario = new Usuario();
+		usuario.setNombre("Felipe");
+		usuario.setApellido("Alphine");
+		usuario.setId("11.111.111-1");
 
 		model.addAttribute("titulo", "Formulario de prueba para usuarios:");
 		model.addAttribute("usuario", usuario);
@@ -46,6 +49,9 @@ public class FormController {
 		 * @RequestParam String password
 		 * 
 		 * @RequestParam String email
+		 * 
+		 * Si en el formulario hay errores luego de la validación se inyecta automáticamente
+		 * el objeto en la vista.
 		 */
 
 		model.addAttribute("titulo", "Resultado del from:");
