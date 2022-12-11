@@ -2,17 +2,20 @@ package com.uncodigo.springboot.form.app.models.domain;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
+// import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Usuario {
 
-	@Pattern(regexp = "[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][A-Z]{1}")
+	// @Pattern(regexp = "[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][A-Z]{1}")
 	private String identificador;
 
 	@NotEmpty(message = "El username no puede ser vació")
 	@Size(min = 3, max = 8, message = "Debe ingresar un username entre 3 y 8 carácteres.")
 	private String username;
+
+	// @NotEmpty
+	private String nombre;
 
 	@NotEmpty
 	private String password;
@@ -20,9 +23,6 @@ public class Usuario {
 	@NotEmpty
 	@Email(message = "Correo con formato incorrecto")
 	private String email;
-
-	@NotEmpty
-	private String nombre;
 
 	@NotEmpty
 	private String apellido;

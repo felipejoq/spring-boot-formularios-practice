@@ -1,5 +1,7 @@
 package com.uncodigo.springboot.form.app.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 // import java.util.HashMap;
 // import java.util.Map;
 
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.uncodigo.springboot.form.app.models.domain.Usuario;
+import com.uncodigo.springboot.form.app.validations.UsuarioValidate;
 
 import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("usuario")
 public class FormController {
+	
+	@Autowired
+	private UsuarioValidate validador;
 
 	@GetMapping("/form")
 	public String form(Model model) {
@@ -57,9 +63,12 @@ public class FormController {
 		 * el objeto en la vista.
 		 */
 
+		validador.validate(usuario, result);
+		
 		model.addAttribute("titulo", "Resultado del from:");
 
 		if (result.hasErrors()) {
+			
 			/*
 			 * Usando map para crear una lista de clave valor y así enviar los mensajes de
 			 * error a la vista.
