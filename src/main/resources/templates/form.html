@@ -31,6 +31,14 @@
 		<div>
 			<label for="username">Username</label>
 			<div>
+				<input id="identificador" type="text" th:field="*{identificador}" />
+			</div>
+			<div th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></div>
+		</div>
+		
+		<div>
+			<label for="identificador">Username</label>
+			<div>
 				<input id="username" type="text" th:field="*{username}" />
 			</div>
 			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
