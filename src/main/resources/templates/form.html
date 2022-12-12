@@ -27,9 +27,17 @@
 			</div>
 			<div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
 		</div>
+		
+		<div>
+			<label for="email">Edad:</label>
+			<div>
+				<input id="email" type="number" th:field="*{edad}" />
+			</div>
+			<div th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></div>
+		</div>
 
 		<div>
-			<label for="username">Username</label>
+			<label for="username">Identificador</label>
 			<div>
 				<input id="identificador" type="text" th:field="*{identificador}" />
 			</div>

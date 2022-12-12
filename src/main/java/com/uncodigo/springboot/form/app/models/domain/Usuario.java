@@ -4,8 +4,11 @@ import com.uncodigo.springboot.form.app.validations.IdentificadorRegex;
 import com.uncodigo.springboot.form.app.validations.Requerido;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 // import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -29,9 +32,14 @@ public class Usuario {
 	@Email(message = "Correo con formato incorrecto")
 	private String email;
 
-	//@NotEmpty
+	// @NotEmpty
 	@Requerido
 	private String apellido;
+
+	@NotNull // Sirve para objetos, para nativos usamos NotEmpty
+	@Min(1)
+	@Max(99)
+	private Integer edad;
 
 	public String getUsername() {
 		return username;
@@ -79,6 +87,14 @@ public class Usuario {
 
 	public void setIdentificador(String id) {
 		this.identificador = id;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
 	}
 
 }
