@@ -1,6 +1,7 @@
 package com.uncodigo.springboot.form.app.models.domain;
 
 import com.uncodigo.springboot.form.app.validations.IdentificadorRegex;
+import com.uncodigo.springboot.form.app.validations.Requerido;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -28,7 +29,8 @@ public class Usuario {
 	@Email(message = "Correo con formato incorrecto")
 	private String email;
 
-	@NotEmpty
+	//@NotEmpty
+	@Requerido
 	private String apellido;
 
 	public String getUsername() {
