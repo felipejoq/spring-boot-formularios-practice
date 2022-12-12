@@ -1,5 +1,9 @@
 package com.uncodigo.springboot.form.app.models.domain;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.uncodigo.springboot.form.app.validations.IdentificadorRegex;
 import com.uncodigo.springboot.form.app.validations.Requerido;
 
@@ -40,6 +44,10 @@ public class Usuario {
 	@Min(1)
 	@Max(99)
 	private Integer edad;
+	
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date fechaNacimiento;
 
 	public String getUsername() {
 		return username;
@@ -95,6 +103,14 @@ public class Usuario {
 
 	public void setEdad(Integer edad) {
 		this.edad = edad;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 }
