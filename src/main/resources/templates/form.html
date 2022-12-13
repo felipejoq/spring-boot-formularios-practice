@@ -12,6 +12,19 @@
 
 	<form th:action="@{/form}" th:object="${usuario}" method="POST">
 
+
+		<div>
+			<label for="pais">País</label>
+			<div>
+				<select id="pais" th:field="*{pais}">
+				<option value="">-- Seleccionar país...</option>
+					<option th:each="pais: ${paises}" th:text="${pais}"
+						th:value="${pais}"></option>
+				</select>
+			</div>
+			<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+		</div>
+
 		<div>
 			<label for="nombre">Nombre</label>
 			<div>
@@ -27,7 +40,7 @@
 			</div>
 			<div th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
 		</div>
-		
+
 		<div>
 			<label for="email">Edad:</label>
 			<div>
@@ -35,13 +48,15 @@
 			</div>
 			<div th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}"></div>
 		</div>
-		
+
 		<div>
 			<label for="fechaNacimiento">Fecha de nacimiento:</label>
 			<div>
-				<input id="fechaNacimiento" type="date" th:field="*{fechaNacimiento}" placeholder="yyyy-MM-dd"/>
+				<input id="fechaNacimiento" type="date"
+					th:field="*{fechaNacimiento}" placeholder="yyyy-MM-dd" />
 			</div>
-			<div th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+			<div th:if="${#fields.hasErrors('fechaNacimiento')}"
+				th:errors="*{fechaNacimiento}"></div>
 		</div>
 
 		<div>
@@ -49,9 +64,10 @@
 			<div>
 				<input id="identificador" type="text" th:field="*{identificador}" />
 			</div>
-			<div th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></div>
+			<div th:if="${#fields.hasErrors('identificador')}"
+				th:errors="*{identificador}"></div>
 		</div>
-		
+
 		<div>
 			<label for="identificador">Username</label>
 			<div>

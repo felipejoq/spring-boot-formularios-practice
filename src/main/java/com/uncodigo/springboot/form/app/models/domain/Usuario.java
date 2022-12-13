@@ -13,8 +13,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Future;
-// import jakarta.validation.constraints.Past;
+// import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Past;
 // import jakarta.validation.constraints.PastOrPresent;
 // import jakarta.validation.constraints.Pattern;
 // import jakarta.validation.constraints.FutureOrPresent;
@@ -50,12 +50,15 @@ public class Usuario {
 	private Integer edad;
 
 	@NotNull
-	// @Past
-	 @Future
+	@Past
+	// @Future
 	// @PastOrPresent
 	// @FutureOrPresent
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
+	
+	@NotEmpty
+	private String pais;
 
 	public String getUsername() {
 		return username;
@@ -119,6 +122,14 @@ public class Usuario {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 
 }
