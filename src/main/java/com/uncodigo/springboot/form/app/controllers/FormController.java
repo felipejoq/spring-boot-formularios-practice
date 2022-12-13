@@ -3,7 +3,9 @@ package com.uncodigo.springboot.form.app.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -53,6 +55,19 @@ public class FormController {
 	@ModelAttribute("paises")
 	public List<String> paises(){
 		return Arrays.asList("Chile","España","México","Argentina","Brasil");
+	}
+	
+	@ModelAttribute("paisesMap")
+	public Map<String, String> paisesMap(){
+		Map<String, String> paises = new HashMap<>();
+		
+		paises.put("ES", "España");
+		paises.put("CL", "Chile");
+		paises.put("AR", "Argentina");
+		paises.put("PE", "Perú");
+		paises.put("CO", "Colombia");
+		
+		return paises;
 	}
  
 	@GetMapping("/form")

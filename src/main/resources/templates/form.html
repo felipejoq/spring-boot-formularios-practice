@@ -17,9 +17,9 @@
 			<label for="pais">País</label>
 			<div>
 				<select id="pais" th:field="*{pais}">
-				<option value="">-- Seleccionar país...</option>
-					<option th:each="pais: ${paises}" th:text="${pais}"
-						th:value="${pais}"></option>
+					<option value="">-- Seleccionar país...</option>
+					<option th:each="pais: ${paisesMap.entrySet()}" th:text="${pais.value}"
+						th:value="${pais.key}"></option>
 				</select>
 			</div>
 			<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
