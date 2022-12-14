@@ -1,12 +1,14 @@
 package com.uncodigo.springboot.form.app.models.domain;
 
 import java.util.Date;
+import java.util.List;
 
 // import org.springframework.format.annotation.DateTimeFormat;
 
 import com.uncodigo.springboot.form.app.validations.IdentificadorRegex;
 import com.uncodigo.springboot.form.app.validations.Requerido;
 
+// import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -56,9 +58,18 @@ public class Usuario {
 	// @FutureOrPresent
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
-	
+
+	// @Valid
+	@NotNull
+	private Pais pais;
+
 	@NotEmpty
-	private String pais;
+	private List<Role> roles;
+
+	private Boolean habilitar;
+
+	@NotEmpty
+	private String genero;
 
 	public String getUsername() {
 		return username;
@@ -124,12 +135,36 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getPais() {
+	public Pais getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Boolean getHabilitar() {
+		return habilitar;
+	}
+
+	public void setHabilitar(Boolean habilitar) {
+		this.habilitar = habilitar;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 }

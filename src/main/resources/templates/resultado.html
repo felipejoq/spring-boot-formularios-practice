@@ -11,15 +11,24 @@
 	<h3 th:text="${titulo}"></h3>
 
 	<ul>
-		<li th:text="${usuario.identificador}"></li>
-		<li th:text="${usuario.nombre}"></li>
-		<li th:text="${usuario.apellido}"></li>
-		<li th:text="${usuario.username}"></li>
-		<li th:text="${usuario.password}"></li>
-		<li th:text="${usuario.email}"></li>
-		<li th:text="${usuario.edad}"></li>
-		<li th:text="${usuario.pais}"></li>
-		<li th:text="${#dates.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></li>
+		<li th:text="'Habilitado: '+${usuario.habilitar}"></li>
+		<li th:text="'Genero: '+${usuario.genero}"></li>
+		<li th:text="'Usiario ID: '+${usuario.identificador}"></li>
+		<li th:text="'Nombre: '+${usuario.nombre}"></li>
+		<li th:text="'Apellido: '+${usuario.apellido}"></li>
+		<li th:text="'Username: '+${usuario.username}"></li>
+		<li th:text="'Password: '+${usuario.password}"></li>
+		<li th:text="'Email: '+${usuario.email}"></li>
+		<li th:text="'Edad: '+${usuario.edad}"></li>
+		<li th:text="'ID País: '+${usuario.pais.id}"></li>
+		<li th:text="'Cód. País: '+${usuario.pais.codigo}"></li>
+		<li th:text="'Nom. País: '+${usuario.pais.nombre}"></li>
+		<li th:text="'Fecha. Nac.'+${#dates.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}"></li>
+	</ul>
+	
+	<h3>Roles</h3>
+	<ul>
+		<li th:each="role: ${usuario.roles}" th:text="${role.id} + ': ' + ${role.nombre}+ ' => ' +${role.role}"></li>
 	</ul>
 
 </body>

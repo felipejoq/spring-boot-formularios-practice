@@ -1,6 +1,7 @@
 package com.uncodigo.springboot.form.app.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,8 +27,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.uncodigo.springboot.form.app.editors.NombreMayusculaEditor;
+import com.uncodigo.springboot.form.app.editors.NombreMayusculaPropertyEditor;
+import com.uncodigo.springboot.form.app.editors.PaisPropertyEditor;
+import com.uncodigo.springboot.form.app.editors.RolesPropertyEditor;
+import com.uncodigo.springboot.form.app.models.domain.Pais;
+import com.uncodigo.springboot.form.app.models.domain.Role;
 import com.uncodigo.springboot.form.app.models.domain.Usuario;
+import com.uncodigo.springboot.form.app.services.PaisService;
+import com.uncodigo.springboot.form.app.services.RoleService;
 import com.uncodigo.springboot.form.app.validations.UsuarioValidate;
 
 import jakarta.validation.Valid;
@@ -38,6 +45,18 @@ public class FormController {
 
 	@Autowired
 	private UsuarioValidate validador;
+	
+	@Autowired
+	private PaisService paisService;
+	
+	@Autowired
+	private PaisPropertyEditor paisEditor;
+	
+	@Autowired
+	private RolesPropertyEditor roleEditor;
+
+	@Autowired
+	private RoleService roleService;;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -48,28 +67,70 @@ public class FormController {
 		dateFormat.setLenient(false);
 
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-		
-		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
+
+		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaPropertyEditor());
+
+		binder.registerCustomEditor(Pais.class, "pais", paisEditor);
+
+		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
-	
+
 	@ModelAttribute("paises")
-	public List<String> paises(){
-		return Arrays.asList("Chile","España","México","Argentina","Brasil");
+	public List<String> paises() {
+		return Arrays.asList("Chile", "España", "México", "Argentina", "Brasil");
 	}
-	
+
+	@ModelAttribute("listaPaises")
+	public List<Pais> listaPaises() {
+		return paisService.listar();
+	}
+
 	@ModelAttribute("paisesMap")
-	public Map<String, String> paisesMap(){
+	public Map<String, String> paisesMap() {
 		Map<String, String> paises = new HashMap<>();
-		
+
 		paises.put("ES", "España");
 		paises.put("CL", "Chile");
 		paises.put("AR", "Argentina");
 		paises.put("PE", "Perú");
 		paises.put("CO", "Colombia");
-		
+
 		return paises;
 	}
- 
+	
+	@ModelAttribute("listaRolesString")
+	public List<String> listaRolesString(){
+		List<String> roles = new ArrayList<>();
+		roles.add("ROLE_ADMIN");
+		roles.add("ROLE_USER");
+		roles.add("ROLE_MODERATOR");
+		
+		return roles;
+	}
+	
+	@ModelAttribute("listaRolesMap")
+	public Map<String, String> listaRolesMap() {
+		Map<String, String> roles = new HashMap<>();
+
+		roles.put("ROLE_ADMIN", "Administrador");
+		roles.put("ROLE_USER", "Usuario");
+		roles.put("ROLE_MODERATOR", "Moderador");
+		
+		return roles;
+	}
+	
+	@ModelAttribute("listaRoles")
+	public List<Role> listaRoles() {
+		
+		return this.roleService.listar();
+	}
+	
+	@ModelAttribute("genero")
+	public List<String> genero() {
+		
+		return Arrays.asList("Masculino", "Femenino", "No informa");
+	}
+
 	@GetMapping("/form")
 	public String form(Model model) {
 
@@ -77,6 +138,7 @@ public class FormController {
 		usuario.setNombre("Felipe");
 		usuario.setApellido("Alphine");
 		usuario.setIdentificador("11.111.111-1");
+		usuario.setHabilitar(true);
 
 		model.addAttribute("titulo", "Formulario de prueba para usuarios:");
 		model.addAttribute("usuario", usuario);
