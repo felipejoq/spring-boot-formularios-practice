@@ -4,7 +4,7 @@ package com.uncodigo.springboot.form.app.models.domain;
 
 public class Pais {
 
-	//@NotNull
+	// @NotNull
 	private Integer id;
 
 	private String codigo;
@@ -43,6 +43,11 @@ public class Pais {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return this.id.toString();
 	}
 
 }

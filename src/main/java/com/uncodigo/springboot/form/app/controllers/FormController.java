@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 // import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 // import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -139,6 +140,9 @@ public class FormController {
 		usuario.setApellido("Alphine");
 		usuario.setIdentificador("11.111.111-1");
 		usuario.setHabilitar(true);
+		usuario.setValorSecreto("Este valor es secreto...");
+		usuario.setPais(new Pais(1, "CL", "Chile"));
+		usuario.setRoles(Arrays.asList(new Role(2, "Usuario", "ROLE_USER")));
 
 		model.addAttribute("titulo", "Formulario de prueba para usuarios:");
 		model.addAttribute("usuario", usuario);
@@ -148,7 +152,7 @@ public class FormController {
 	}
 
 	@PostMapping("/form")
-	public String procesarForm(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+	public String procesarForm(@Valid Usuario usuario, BindingResult result, Model model) {
 
 		/*
 		 * @ModelAttribute("user") -> Para definir un nombre de variable personalizado y
@@ -170,10 +174,8 @@ public class FormController {
 
 		validador.validate(usuario, result);
 
-		model.addAttribute("titulo", "Resultado del from:");
-
 		if (result.hasErrors()) {
-
+			model.addAttribute("titulo", "Resultado del from:");
 			/*
 			 * Usando map para crear una lista de clave valor y así enviar los mensajes de
 			 * error a la vista.
@@ -198,8 +200,22 @@ public class FormController {
 		 * model.addAttribute("usuario", usuario);
 		 */
 
-		status.setComplete();
 
+
+		return "redirect:/ver";
+	}
+	
+	@GetMapping("/ver")
+	public String ver(@SessionAttribute(name="usuario", required=false) Usuario usuario, Model model, SessionStatus status) {
+		
+		if(usuario==null) {
+			return "redirect:/form";
+		}
+		
+		model.addAttribute("titulo", "Resultado del from:");
+		
+		status.setComplete();
+		
 		return "resultado";
 	}
 
